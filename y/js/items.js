@@ -1,5 +1,7 @@
 // Referència a la col·lecció "items" de Firestore
 const items = db.collection("items");
+// Referència a la col·lecció "categories" de Firestore
+const categories = db.collection("categories")
 
 /**
  * Afegeix un nou document a la col·lecció.
@@ -73,9 +75,10 @@ async function editItem(id) {
 async function loadItems() {
   try {
     // Obtenim l'array de documents des de Firestore
-    // const arrayItems = await selectAll(items);
+    const arrayItems = await selectAll(items);
     //const arrayItems = await selectAll(items, 'title');
-    const arrayItems = await selectWhere(items, 'title', "==", "Asss");
+    //const arrayItems = await selectWhere(items, 'title', "==", "Asss");
+    //const arrayItems = await selectLike(items, 'title', "As");
 
     // Capçalera de la taula
     const table = document.getElementById("listItems");
@@ -88,11 +91,14 @@ async function loadItems() {
     `;
 
     // Iterem cada document i construïm una fila per a la taula
-    arrayItems.forEach((doc) => {
-      const { title, content } = doc.data();
+    arrayItems.forEach(async (doc) => {
+      const { title, content, category } = doc.data();
+      const docCat = await selectById(categories, category.id);
+      const categoryName = docCat.data().name;
+      
       table.innerHTML += `
         <tr>
-          <td>${title}</td>
+          <td>${title} - ${categoryName}</td>
           <td>${content}</td>
           <td>
             <button type="button" class="btn btn-danger float-right" onclick="deleteItem('${doc.id}')">
