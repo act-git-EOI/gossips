@@ -4,7 +4,7 @@ firebase.initializeApp({
     projectId: "gossipis",
     storageBucket: "gossipis.firebasestorage.app",
     messagingSenderId: "1023394385289",
-    appId: "1:1023394385289:web:6902f6ba676639524a2558"
+    appId: "1:1023394385289:web:7dc319ecb9f52f274a2558"
 });
 
 const auth = firebase.auth();
