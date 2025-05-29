@@ -73,13 +73,7 @@ async function editItem(id) {
 async function loadItems() {
   try {
     // Obtenim l'array de documents des de Firestore
-<<<<<<< HEAD
     const arrayItems = await selectAll(items);
-=======
-    // const arrayItems = await selectAll(items);
-    //const arrayItems = await selectAll(items, 'title');
-    const arrayItems = await selectWhere(items, 'title', "==", "Asss");
->>>>>>> parent of 7f07ed0 (Algunos cambios de practica en items)
 
     // Capçalera de la taula
     const table = document.getElementById("listItems");
